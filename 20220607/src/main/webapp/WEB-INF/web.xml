@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- Fisrt란 이름으로 패키지명을 포함한 풀네임을 Servlet컨테이너에 올려둔다. -->
+	<servlet>
+		<servlet-name>First</servlet-name>
+		<servlet-class>co.micol.prj.First</servlet-class>
+	</servlet>
+	
+	<!-- 주소창에 /First로 요청이 들어오면 First라는 서블릿을 찾아가라 -->
+	<servlet-mapping>
+		<servlet-name>First</servlet-name>
+		<url-pattern>/First</url-pattern>
+	</servlet-mapping>
+</web-app>
