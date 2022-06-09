@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+<!-- *.tiles로 들어오는 모든 것은 layout.jsp여기서 처리 -->
+  <definition name="myapp.homepage" template="/WEB-INF/views/layout/layout.jsp">
+    <put-attribute name="title" value="My Web" />
+    <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+    <put-attribute name="nav" value="/WEB-INF/views/layout/nav.jsp" />
+    <put-attribute name="body" value="" />
+    <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+  </definition>
+  
+  <!-- 폴더명/페이지명으로 들어오면 myapp.homepage상속받아서 body값에 value를 넣어주기-->
+  <definition name="WILDCARD:*/*" extends="myapp.homepage">
+  	<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+  </definition>
+</tiles-definitions>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.jik.study.notice.service.NoticeMapper">
+	<select id="noticeSelectList" resultType="co.jik.study.notice.vo.NoticeVO">
+		select * from notice order by id desc
+	</select>
+	
+	<select id="noticeSearchList" parameterType="String" resultType="co.jik.study.notice.vo.NoticeVO">
+		select * from notice
+		where
+			<if test="key == 1"> 1 = 1</if>
+			<!-- 넘어오는 값이 포함되어 있다면 -->
+			<if test="key == 2"> title like '%' || #{var} || '%'</if>
+			<if test="key == 3"> subject like '%' || #{var} || '%'</if>
+	</select>
+
+	<select id="noticeSelect" parameterType="co.jik.study.notice.vo.NoticeVO"
+				resultType="co.jik.study.notice.vo.NoticeVO">
+		<!-- vo객체가 갖고 있는 이름 그대로 작성해야 함-->
+		select * from notice where id = #{id}
+	</select>
+
+	<insert id="noticeInsert" parameterType="co.jik.study.notice.vo.NoticeVO">
+		insert into notice
+		values(b_id.nextval, #{writer}, #{title}, #{subject}, #{wdate}, 0)
+	</insert>
+
+	<update id="noticeUpdate" parameterType="co.jik.study.notice.vo.NoticeVO">
+		update notice
+		<set>
+			<!-- writer가 값이 있다면 writer는 넘어온 writer -->
+			<if test="writer != null">writer = #{writer},</if>
+			<if test="title != null">title = #{title},</if>
+			<if test="subject != null">subject = #{subject},</if>
+			<if test="wdate != null">wdate = #{wdate},</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="noticeDelete" parameterType="co.jik.study.notice.vo.NoticeVO">
+		delete from notice where id = #{id}
+	</delete>
+	
+	<update id="noticeHitUpdate" parameterType="int">
+		update notice set hit = hit + 1 where = #{id}
+	</update>
+</mapper>
